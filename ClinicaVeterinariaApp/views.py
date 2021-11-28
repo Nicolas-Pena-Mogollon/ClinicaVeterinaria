@@ -9,6 +9,8 @@ from ClinicaVeterinariaApp.models import Usuario, Rol
 from ClinicaVeterinariaApp.serializers import UsuarioSerializer, RolSerializer
 
 # Create your views here.
+from ClinicaVeterinariaApp.services.adminService import AdminService
+from ClinicaVeterinariaApp.services.mascotaService import MascotaService
 from ClinicaVeterinariaApp.services.usuarioService import UsuarioService
 
 
@@ -16,7 +18,6 @@ from ClinicaVeterinariaApp.services.usuarioService import UsuarioService
 def usuariosAPI(request):
     if request.method == 'GET':
         return JsonResponse(UsuarioService().validarLoginUsuario(request), safe=False)
-
     elif request.method == 'POST':
         usuario_data = JSONParser().parse(request)
         return JsonResponse(UsuarioService().guardarUsuario(usuario_data), safe=False)
@@ -27,7 +28,32 @@ def usuariosAPI(request):
 
 
 @csrf_exempt
+def adminAPI(request):
+    if request.method == 'GET':
+        return JsonResponse(AdminService().listarVeterniarios(), safe=False)
+    elif request.method == 'POST':
+        print("algo")
+    elif request.method == 'PUT':
+        print("Actualizar")
+    elif request.method == 'DELETE':
+        return JsonResponse(AdminService().eliminarVeterinario(request.GET.get("username", "")), safe=False)
+
+
+@csrf_exempt
+def macotasAPI(request):
+    if request.method == 'GET':
+        print("do something")
+    elif request.method == 'POST':
+        mascota_data = JSONParser().parse(request)
+        return JsonResponse(MascotaService().guardarMascota(mascota_data), safe=False)
+    else:
+        print("do something")
+
+
+"""
+@csrf_exempt
 def rolAPI(request):
+    
     if request.method == 'GET':
         print(request)
         roles = Rol.objects.raw('SELECT * FROM rol')
@@ -42,3 +68,4 @@ def rolAPI(request):
             rol_serializer.save()
             return JsonResponse(rol_serializer.data, safe=False)
         return JsonResponse("Fallo al registrar", safe=False)
+"""

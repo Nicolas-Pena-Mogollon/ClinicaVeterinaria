@@ -4,7 +4,6 @@ from ClinicaVeterinariaApp.models import Usuario
 from ClinicaVeterinariaApp.serializers import UsuarioSerializer
 
 
-
 class UsuarioService:
 
     def guardarUsuario(self, usuario_data):
@@ -14,7 +13,11 @@ class UsuarioService:
             usuario_serializer.save()
             return "se ha registrado correctamente"
 
-        usuario = Usuario.objects.get(username=usuario_serializer.data['username'])
+        try:
+            usuario = Usuario.objects.get(username=usuario_serializer.data['username'])
+        except Usuario.DoesNotExist:
+            usuario = None
+
         if usuario:
             return "Ya se encuentra registrado un usuario con este username!"
 
