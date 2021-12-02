@@ -1,5 +1,3 @@
-import cod as cod
-
 from ClinicaVeterinariaApp.models import Usuario, Especializacion
 from ClinicaVeterinariaApp.serializers import UsuarioSerializer, EspecializacionSerializer
 
