@@ -34,6 +34,7 @@ class Usuario(models.Model):
     tel_fijo = models.CharField(max_length=7, blank=True, null=True)
     tel_celular = models.CharField(max_length=10, blank=True, null=True)
     est_usuario = models.CharField(max_length=1, blank=True, null=True)
+    usuarioespec = models.ManyToManyField(Especializacion, db_table='usuarioespec', blank=True)
 
     class Meta:
         managed = False

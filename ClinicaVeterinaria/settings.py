@@ -75,18 +75,14 @@ WSGI_APPLICATION = 'ClinicaVeterinaria.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'vetdatabase',
-        'USER': 'root',
-        'PASSWORD': '6ajevi9e',
-        'HOST': '192.168.0.50',  # Or an IP Address that your DB is hosted on
-        'PORT': '3306',
+        'OPTIONS': {
+            'read_default_file': './ClinicaVeterinaria/resources/config.cnf',
+        },
     }
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 

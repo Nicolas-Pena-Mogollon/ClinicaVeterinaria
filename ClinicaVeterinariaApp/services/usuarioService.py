@@ -34,7 +34,6 @@ class UsuarioService:
 
         if usuario:
             if usuario.clave == credenciales[1]:
-                print(usuario.cod_rol.descripcion)
                 return usuario.cod_rol.descripcion
-            return "Contraseña incorrecta!"
+            return "Clave incorrecta!"
         return "Nombre de usuario incorrecto!"
